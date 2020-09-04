@@ -16,7 +16,7 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
-      - name: Add github token
-        run: echo //npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}} | tee .npmrc $HOME/.npmrc > /dev/null
       - name: Publish
-        run: npm publish
+        run: |
+          echo //npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}} > ~/.npmrc
+          npm publish

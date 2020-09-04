@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  run:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Node v12.16.2
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.18.3'
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Add github token
+        run: echo //registry.npmjs.org/:_authToken=${{secrets.GITHUB_TOKEN}}} | tee .npmrc $HOME/.npmrc > /dev/null
+      - name: Publish
+        run: npm publish

@@ -19,4 +19,4 @@ jobs:
       - name: Publish
         run: |
           echo //npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}} > ~/.npmrc
-          npm publish
+          npm publish --access public
